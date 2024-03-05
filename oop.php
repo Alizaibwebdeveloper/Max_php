@@ -427,8 +427,303 @@ class Employee extends Person {
 $employee = new Employee("Pratik Octavius", 33, 6000, "Manager");
 $employee->displayDetails();
 
+// *********PHP class with comparable interface************
 
+
+interface Comparable {
+    public function compareTo($other);
+}
+
+class Product implements Comparable {
+    private $name;
+    private $price;
+
+    public function __construct($name, $price) {
+        $this->name = $name;
+        $this->price = $price;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getPrice() {
+        return $this->price;
+    }
+
+    public function compareTo($other) {
+        if ($other instanceof Product) {
+            if ($this->price < $other->getPrice()) {
+                return -1;
+            } elseif ($this->price > $other->getPrice()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            throw new Exception("Invalid comparison object.");
+        }
+    }
+}
+
+$product1 = new Product("Desktop", 1200);
+$product2 = new Product("Laptop", 1000);
+
+$result = $product1->compareTo($product2);
+
+if ($result < 0) {
+    echo $product1->getName() . " is cheaper than " . $product2->getName() . "</br>";
+} elseif ($result > 0) {
+    echo $product1->getName() . " is more expensive than " . $product2->getName() . "</br>";
+} else {
+    echo $product1->getName() . " and " . $product2->getName() . " have the same price.</br>";
+}
+
+// ************PHP class with a static property
+
+
+// class Logger {
+//     public static $logCount = 0;
+
+//     public static function log($message) {
+//         echo $message . "</br>";
+//         self::$logCount++;
+//     }
+// }
+// Logger::log("Log message 1");
+// Logger::log("Log message 2");
+// Logger::log("Log message 3");
+
+// echo "Total log count: " . Logger::$logCount . "</br>";
+
+// *********PHP class for mathematical calculations
+
+
+
+class Math {
+    public static function add($num1, $num2) {
+        return $num1 + $num2;
+    }
+
+    public static function subtract($num1, $num2) {
+        return $num1 - $num2;
+    }
+
+    public static function multiply($num1, $num2) {
+        return $num1 * $num2;
+    }
+}
+
+$result1 = Math::add(4, 3);
+$result2 = Math::subtract(14, 4);
+$result3 = Math::multiply(8, 2);
+
+echo "Addition: " . $result1 . "</br>";
+echo "Subtraction: " . $result2 . "</br>";
+echo "Multiplication: " . $result3 . "</br>";
+
+// ***********PHP class for file operations
+
+
+class File {
+    public $name;
+    public $size;
+
+    public function __construct($name, $size) {
+        $this->name = $name;
+        $this->size = $size;
+    }
+
+    public static function calculateTotalSize($files) {
+        $totalSize = 0;
+
+        foreach ($files as $file) {
+            if ($file instanceof File) {
+                $totalSize += $file->size;
+            }
+        }
+
+        return $totalSize;
+    }
+}
+
+$file1 = new File("file1.txt", 1000);
+$file2 = new File("file2.txt", 2000);
+$file3 = new File("file3.txt", 1500);
+
+$files = [$file1, $file2, $file3];
+$totalSize = File::calculateTotalSize($files);
+
+echo "Total size of files: " . $totalSize . " bytes .'<br>'";
+
+
+// ****************PHP calculator class: Perform Arithmetic operations
+
+
+
+class Calculator {
+    private $result;
+
+    public function __construct() {
+        $this->result = 0;
+    }
+
+    public function getResult() {
+        return $this->result;
+    }
+
+    public function add($number) {
+        $this->result += $number;
+    }
+
+    public function subtract($number) {
+        $this->result -= $number;
+    }
+}
+
+$calculator = new Calculator();
+
+$calculator->add(4);
+$calculator->add(5);
+$calculator->subtract(3);
+
+$result = $calculator->getResult();
+echo "Result: " . $result. "<br>";
+
+// *************PHP OOP: Shopping cart class
+
+
+
+class ShoppingCart {
+    private $items;
+    private $total;
+
+    public function __construct() {
+        $this->items = [];
+        $this->total = 0;
+    }
+
+    public function addItem($item, $price) {
+        $this->items[$item] = $price;
+        $this->total += $price;
+    }
+
+    public function getTotal() {
+        return $this->total;
+    }
+}
+
+$cart = new ShoppingCart();
+
+$cart->addItem("Product 1", 20);
+$cart->addItem("Product 2", 30);
+$cart->addItem("Product 3", 10);
+
+$total = $cart->getTotal();
+echo "Total cost: $" . $total ."<br>";
+
+// ************PHP Class: Singleton design pattern implementation
+
+
+class Logger {
+    private static $instance;
+    private $logs;
+
+    private function __construct() {
+        $this->logs = [];
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new Logger();
+        }
+
+        return self::$instance;
+    }
+
+    public function log($message) {
+        $this->logs[] = $message;
+    }
+
+    public function getLogs() {
+        return $this->logs;
+    }
+}
+
+$logger = Logger::getInstance();
+$logger->log("Log message 1</br>");
+$logger->log("Log message 2</br>");
+
+$logs = $logger->getLogs();
+foreach ($logs as $log) {
+    echo $log . "\n";
+}
+
+
+
+// *********PHP validation class: Email, password, and field validation**********
+
+
+
+class Validation {
+    public static function validateEmail($email) {
+        // Check if the email is valid using a regular expression
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
+
+    public static function validatePassword($password) {
+        // Here's an example that checks if the password is at least 8 characters long
+        return strlen($password) >= 8;
+    }
+
+    public static function validateField($field) {
+        // Here's an example that checks if the field is not empty
+        return !empty($field);
+    }
+}
+
+$email = "admin@example.com";
+$password = "password123";
+$field = "";
+
+if (Validation::validateEmail($email)) {
+    echo "Email is valid.</br>";
+} else {
+    echo "Email is invalid.</br>";
+}
+
+if (Validation::validatePassword($password)) {
+    echo "Password is valid.</br>";
+} else {
+    echo "Password is invalid.v";
+}
+
+if (Validation::validateField($field)) {
+    echo "Field is valid.</br>";
+} else {
+    echo "Field is invalid.</br>";
+}
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
