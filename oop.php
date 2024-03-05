@@ -88,7 +88,73 @@ echo "Triangle Area: " . $triangle->calculateArea() . "</br>";
 $rectangle = new Rectangle(4, 6);
 echo "Rectangle Area: " . $rectangle->calculateArea() . "</br>";
 
+
+// ********* PHP interface resizable: Resizing functionality in the square class
+
+
+interface Resizable {
+    public function resize($percentage);
+}
+
+class Square implements Resizable {
+    private $side;
+
+    public function __construct($side) {
+        $this->side = $side;
+    }
+
+    public function resize($percentage) {
+        $this->side = $this->side * ($percentage / 100);
+    }
+
+    public function getArea() {
+        return pow($this->side, 2);
+    }
+
+    public function getSide() {
+        return $this->side;
+    }
+}
+
+$square = new Square(10);
+echo "Initial Side Length: " . $square->getSide() . "</br>";
+
+$square->resize(60); // Resize the square to 60% of its original size
+echo "Resized Side Length: " . $square->getSide() . "</br>";
+
+echo "Area: " . $square->getArea() . "</br>";
+
+
+
+// ****************PHP class vehicle: Display vehicle details
+
+
+class Vehicle {
+    private $brand;
+    private $model;
+    private $year;
+
+    public function __construct($brand, $model, $year) {
+        $this->brand = $brand;
+        $this->model = $model;
+        $this->year = $year;
+    }
+
+    public function displayDetails() {
+        echo "Brand: " . $this->brand . "</br>";
+        echo "Model: " . $this->model . "</br>";
+        echo "Year: " . $this->year . "</br>";
+    }
+}
+$car = new Vehicle("Ford", "F-150", 2020);
+$car->displayDetails();
+
+
 ?>
+
+
+
+
 
 
 
