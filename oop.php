@@ -297,8 +297,142 @@ $account->withdraw(600);
 $account->withdraw(700);
 
 
+// **************PHP OOP: Abstract class for animal
+
+
+abstract class Animal
+{
+    abstract public function eat();
+    abstract public function makeSound();
+}
+
+class Dog extends Animal
+{
+    public function eat()
+    {
+        echo "Dog is eating.</br>";
+    }
+
+    public function makeSound()
+    {
+        echo "Dog is barking.</br>";
+    }
+}
+
+class Cat extends Animal
+{
+    public function eat()
+    {
+        echo "Cat is eating.</br>";
+    }
+
+    public function makeSound() {
+        echo "Cat is meowing.</br>";
+    }
+}
+
+class Bird extends Animal
+ {
+    public function eat()
+    {
+        echo "Bird is eating.</br>";
+    }
+
+    public function makeSound()
+    {
+        echo "Bird is chirping.</br>";
+    }
+}
+
+$dog = new Dog();
+$dog->eat();
+$dog->makeSound();
+
+$cat = new Cat();
+$cat->eat();
+$cat->makeSound();
+
+$bird = new Bird();
+$bird->eat();
+$bird->makeSound();
+
+
+
+// ************ PHP OOP: Class with magic method********
+
+
+//  class Person {
+//     private $name;
+//     private $age;
+
+//     public function __construct($name, $age) {
+//         $this->name = $name;
+//         $this->age = $age;
+//     }
+
+//     public function __toString() {
+//         return "Name: " . $this->name . "</br>" .
+//                "Age: " . $this->age . "</br>";
+//     }
+// }
+
+// $person = new Person("Natalius Esther", 30);
+// echo $person;
+
+
+// *********PHP class inheritance with extended class********
+
+
+ class Person {
+    protected $name;
+    protected $age;
+
+    public function __construct($name, $age) {
+        $this->name = $name;
+        $this->age = $age;
+    }
+
+    public function __toString() {
+        return "Name: " . $this->name . "\n" .
+               "Age: " . $this->age . "\n";
+    }
+}
+
+class Employee extends Person {
+    private $salary;
+    private $position;
+
+    public function __construct($name, $age, $salary, $position) {
+        parent::__construct($name, $age);
+        $this->salary = $salary;
+        $this->position = $position;
+    }
+
+    public function getSalary() {
+        return $this->salary;
+    }
+
+    public function getPosition() {
+        return $this->position;
+    }
+
+    public function displayDetails() {
+        echo "Name: " . $this->name . "</br>";
+        echo "Age: " . $this->age . "</br>";
+        echo "Salary: " . $this->salary . "</br>";
+        echo "Position: " . $this->position . "</br>";
+    }
+}
+
+$employee = new Employee("Pratik Octavius", 33, 6000, "Manager");
+$employee->displayDetails();
+
 
 ?>
+
+
+
+
 
 
 
